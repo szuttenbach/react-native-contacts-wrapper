@@ -142,13 +142,13 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
       //Return first phone number
       if([phoneNos count] > 0) {
         NSUInteger count = [phoneNos count];
-        NSArray *phones = [[NSArray alloc] init];ž
+        NSArray *phones = [[NSArray alloc] init];
         for (NSUInteger i = 0; i < count; i++) {
           CNPhoneNumber *phone = ((CNLabeledValue *)phoneNos[i]).value;
           phones[i] = phone;
         }
         NSString *phonesString = [phones componentsJoinedByString:@";"];
-        [contactData setValue:phonesString.stringValue forKey:@"phone"];
+        [contactData setValue:phonesString forKey:@"phone"];
       }
       
       //Return first email address

@@ -145,7 +145,7 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
         NSMutableArray *phones = [[NSMutableArray alloc] init];
         for (NSUInteger i = 0; i < count; i++) {
           CNPhoneNumber *phone = ((CNLabeledValue *)phoneNos[i]).value;
-          phones[i] = phone;
+          phones[i] = phone.stringValue;
         }
         NSString *phonesString = [phones componentsJoinedByString:@";"];
         [contactData setValue:phonesString forKey:@"phone"];

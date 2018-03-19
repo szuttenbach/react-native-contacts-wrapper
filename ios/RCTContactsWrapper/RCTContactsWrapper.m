@@ -142,7 +142,7 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
       //Return first phone number
       if([phoneNos count] > 0) {
         NSUInteger count = [phoneNos count];
-        NSArray *phones = [[NSArray alloc] init];
+        NSMutableArray *phones = [[NSMutableArray alloc] init];
         for (NSUInteger i = 0; i < count; i++) {
           CNPhoneNumber *phone = ((CNLabeledValue *)phoneNos[i]).value;
           phones[i] = phone;

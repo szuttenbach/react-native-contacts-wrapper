@@ -159,7 +159,7 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
           CNPhoneNumber *email = ((CNLabeledValue *)emailAddresses[i]).value;
           emails[i] = email.stringValue;
         }
-        NSString *emailsString = [phones componentsJoinedByString:@";"];
+        NSString *emailsString = [emails componentsJoinedByString:@";"];
         [contactData setValue:emailsString forKey:@"emails"];
       }
       

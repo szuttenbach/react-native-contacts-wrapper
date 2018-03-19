@@ -141,15 +141,8 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
       
       //Return first phone number
       if([phoneNos count] > 0) {
-        NSUInteger count = [phoneNos count];
-        NSArray *phones;
-        for (NSUInteger i = 0; i < count; i++) {
-          CNPhoneNumber *phone = ((CNLabeledValue *)phoneNos[i]).value;
-          phones[i] = phone;
-        }
-        
-        NSString *joinedPhone = [phones componentsJoinedByString:@","];
-        [contactData setValue:joinedPhone.stringValue forKey:@"phone"];
+        CNPhoneNumber *phone = ((CNLabeledValue *)phoneNos[0]).value;
+        [contactData setValue:phone.stringValue forKey:@"phone"];
       }
       
       //Return first email address
@@ -254,6 +247,7 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker {
   [self pickerCancelled];
 }
+
 
 
 

@@ -107,7 +107,7 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
 
 
 - (NSMutableDictionary *) emptyContactDict {
-  return [[NSMutableDictionary alloc] initWithObjects:@[@"", @"", @""] forKeys:@[@"name", @"phone", @"email"]];
+  return [[NSMutableDictionary alloc] initWithObjects:@[@"", @"", @""] forKeys:@[@"name", @"phones", @"emails"]];
 }
 
 /**
@@ -142,14 +142,13 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
       //Return first phone number
       if([phoneNos count] > 0) {
         NSUInteger count = [phoneNos count];
-        NSArray *phones;
+        NSArray *phones = [[NSArray alloc] init];ž
         for (NSUInteger i = 0; i < count; i++) {
           CNPhoneNumber *phone = ((CNLabeledValue *)phoneNos[i]).value;
-          [contactData setValue:phone.stringValue forKey:@"phone"];
+          phones[i] = phone;
         }
-        
-//        CNPhoneNumber *phone = ((CNLabeledValue *)phoneNos[0]).value;
-        
+        NSString *phonesString = [phones componentsJoinedByString:@";"];
+        [contactData setValue:phonesString.stringValue forKey:@"phone"];
       }
       
       //Return first email address

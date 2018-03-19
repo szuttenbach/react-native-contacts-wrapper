@@ -148,12 +148,19 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
           phones[i] = phone.stringValue;
         }
         NSString *phonesString = [phones componentsJoinedByString:@";"];
-        [contactData setValue:phonesString forKey:@"phone"];
+        [contactData setValue:phonesString forKey:@"phones"];
       }
       
       //Return first email address
       if([emailAddresses count] > 0) {
-        [contactData setValue:((CNLabeledValue *)emailAddresses[0]).value forKey:@"email"];
+        NSUInteger count = [emailAddresses count];
+        NSMutableArray *emails = [[NSMutableArray alloc] init];
+        for (NSUInteger i = 0; i < count; i++) {
+          CNPhoneNumber *email = ((CNLabeledValue *)emailAddresses[i]).value;
+          emails[i] = email.stringValue;
+        }
+        NSString *emailsString = [phones componentsJoinedByString:@";"];
+        [contactData setValue:emailsString forKey:@"emails"];
       }
       
       [self contactPicked:contactData];

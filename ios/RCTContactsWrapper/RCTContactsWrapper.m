@@ -147,8 +147,8 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
           CNPhoneNumber *phone = ((CNLabeledValue *)phoneNos[i]).value;
           phones[i] = phone.stringValue;
         }
-        NSString *phonesString = [phones componentsJoinedByString:@";"];
-        [contactData setValue:phonesString forKey:@"phones"];
+//        NSString *phonesString = [phones componentsJoinedByString:@";"];
+        [contactData setValue:phones forKey:@"phones"];
       }
       
       //Return first email address

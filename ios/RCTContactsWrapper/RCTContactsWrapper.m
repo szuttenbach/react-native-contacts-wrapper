@@ -139,7 +139,7 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
       //Return full name
       [contactData setValue:fullName forKey:@"name"];
       
-      //Return first phone number
+      //Return phones number
       if([phoneNos count] > 0) {
         NSUInteger count = [phoneNos count];
         NSMutableArray *phones = [[NSMutableArray alloc] init];
@@ -150,7 +150,7 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
         [contactData setValue:phones forKey:@"phones"];
       }
       
-      //Return first email address
+      //Return emails address
       if([emailAddresses count] > 0) {
         NSUInteger count = [emailAddresses count];
         NSMutableArray *emails = [[NSMutableArray alloc] init];

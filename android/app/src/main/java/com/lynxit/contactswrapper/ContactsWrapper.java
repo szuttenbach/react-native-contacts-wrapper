@@ -113,7 +113,7 @@ public class ContactsWrapper extends ReactContextBaseJavaModule implements Activ
           return;
         }
 
-        String email = null;
+        List emails = new ArrayList();
         switch (resultCode) {
             case (Activity.RESULT_OK):
                 Uri contactUri = intent.getData();
@@ -199,9 +199,13 @@ public class ContactsWrapper extends ReactContextBaseJavaModule implements Activ
                             int emailIdx = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA);
 
                             // For now, return only the first email address, as a string
-                            if (cursor.moveToFirst()) {
-                                email = cursor.getString(emailIdx);
-                                mContactsPromise.resolve(email);
+
+                            if (cursor.getCount() > 0) {
+                                while (cursor.moveToNext()) {
+                                    emails.add(cursor.getString(emailIdx));
+                                }
+
+                                mContactsPromise.resolve(emails.toArray());
                                 return;
                             } else {
                                 //Contact has no email address stored

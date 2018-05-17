@@ -113,9 +113,7 @@ public class ContactsWrapper extends ReactContextBaseJavaModule implements Activ
           return;
         }
 
-        ArrayList phones = new ArrayList();
         ArrayList emails = new ArrayList();
-
         switch (resultCode) {
             case (Activity.RESULT_OK):
                 Uri contactUri = intent.getData();
@@ -127,7 +125,7 @@ public class ContactsWrapper extends ReactContextBaseJavaModule implements Activ
                             //First get ID
                             String id = null;
                             int idx;
-                           //  WritableMap contactData = Arguments.createMap();
+                            WritableMap contactData = Arguments.createMap();
                             Cursor cursor = this.contentResolver.query(contactUri, null, null, null, null);
                             if (cursor != null && cursor.moveToFirst()) {
                                 idx = cursor.getColumnIndex(ContactsContract.Contacts._ID);
@@ -166,17 +164,16 @@ public class ContactsWrapper extends ReactContextBaseJavaModule implements Activ
                                 do {
                                     mime = cursor.getString(mimeIdx);
                                     if(returnKeys.containsKey(mime)) {
-                                        phones.add((String) returnKeys.get(mime), cursor.getString(dataIdx));
-                                       //  contactData.putString((String) returnKeys.get(mime), cursor.getString(dataIdx));
+                                        contactData.putString((String) returnKeys.get(mime), cursor.getString(dataIdx));
                                         foundData = true;
                                     }
                                 } while (cursor.moveToNext());
                             }
 
                             cursor.close();
-
+                            
                             if(foundData) {
-                                mContactsPromise.resolve(phones.toArray());
+                                mContactsPromise.resolve(contactData);
                                 return;
                             } else {
                                 mContactsPromise.reject(E_CONTACT_NO_DATA, "No data found for contact");

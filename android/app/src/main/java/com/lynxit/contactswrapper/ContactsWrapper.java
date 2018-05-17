@@ -166,7 +166,7 @@ public class ContactsWrapper extends ReactContextBaseJavaModule implements Activ
                                 do {
                                     mime = cursor.getString(mimeIdx);
                                     if(returnKeys.containsKey(mime)) {
-                                        phones.add(cursor.getString(dataIdx));
+                                        phones.add((String) returnKeys.get(mime), cursor.getString(dataIdx));
                                        //  contactData.putString((String) returnKeys.get(mime), cursor.getString(dataIdx));
                                         foundData = true;
                                     }

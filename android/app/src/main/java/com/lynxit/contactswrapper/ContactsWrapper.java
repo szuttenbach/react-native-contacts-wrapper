@@ -176,7 +176,7 @@ public class ContactsWrapper extends ReactContextBaseJavaModule implements Activ
                             cursor.close();
 
                             if(foundData) {
-                                mContactsPromise.resolve(phones);
+                                mContactsPromise.resolve(phones.toArray());
                                 return;
                             } else {
                                 mContactsPromise.reject(E_CONTACT_NO_DATA, "No data found for contact");
